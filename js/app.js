@@ -11,6 +11,7 @@ for(var i =0;i<suites.length;i++)
 
 //Make to play with money... array of objects...
 // arreglar el show number, quizas meterle fichas de casino...
+// double function for only up
 //Work on the Design
 //Play Button does not dissapear
 
@@ -64,6 +65,7 @@ $(`#SplitMe`).on(`click`,SplitFunct);
 
 function SplitFunct()
 {
+    $(`#double`).hide();
     audioCard.play();
     $(`#Stand`).hide();
     $(`#StandSplit`).hide();
@@ -84,15 +86,30 @@ function SplitFunct()
     
 }
 
+$(`#double`).on(`click`,doubleFunct);
+
+function doubleFunct()
+{
+    $(`#double`).hide();
+    //bid *=2;
+    hitMe();
+    setTimeout(() => {
+        StandFunction();
+    }, 1100);
+
+}
+
 document.getElementById("show").innerHTML= num1+ " "+num2;
 
 $(`#PlayBtn`).on(`click`, PlayMe);
 
+$(`#double`).hide();
+$(`#Stand`).hide();
 
 function PlayMe()
 {
     audioCardsMult.play();
-    $(`#PlayBtn`).hide();
+    $(`#buttonPlay`).hide();
     $(`.firstBtn`).show();
     $(`#SplitMe`).hide();
     $(`.split`).hide();
@@ -189,8 +206,7 @@ function PlayMe()
 
     num1 = Math.round(Math.random()*51);
     num2 = Math.round(Math.random()*51);
-    //num1 = 2;
-    //num2 = 3;
+    num1 = num2;
 
     $(`#myCard1`).attr(`src`,`${cardsGifs[num1]}`);
     setTimeout(() => {
@@ -234,6 +250,12 @@ function PlayMe()
         $(`#show2`).append(`<p id="A2">${temp-10}</p>`);
     }  
 
+    if(temp<=11 ||(temp<=20 && aQuantity>0))
+    {
+        //if available money is >= bid, then....
+        $(`#double`).show();
+    }
+
 
     if(temp==21)
     {
@@ -243,6 +265,7 @@ function PlayMe()
             <b>BLACKJACK!! Well Done! </b></p>`);
             $(`#Hit`).hide(); 
             $(`#Stand`).hide(); 
+            $(`#buttonPlay`).show();
     }
     else
     {
@@ -296,8 +319,12 @@ function StandFunction()
 
         $(`#DealerCard2`).css({ "background-color": "snow"})
         setTimeout(() => {
-        $(`#Dealershow2`).show();
-        $(`#DealerCard2`).attr(`src`,`${cards[dealerNum2]}`);   
+            if(dealerTemp>16)
+            {
+                $(`#buttonPlay`).show();
+            }
+            $(`#Dealershow2`).show();
+            $(`#DealerCard2`).attr(`src`,`${cards[dealerNum2]}`);   
         }, 1000);
 
 
@@ -439,8 +466,6 @@ function StandFunction()
                 }
         }
     }
-    $(`#PlayBtn`).show();
-
 }
 
 function replaceCard(numbersC, card)
@@ -449,11 +474,13 @@ function replaceCard(numbersC, card)
         $(`#DealerCard${numbersC+2}`).css({ "background-color": "snow", "border-radius": "15%" ,
         "padding": "10px","border": "1px solid black","border-width": "thick"});
         $(`#DealerCard${numbersC+2}`).attr(`src`,`${cards[card]}`);
+        $(`#buttonPlay`).show();
     }, 1000*(numbersC+1));
 }
 
 function hitMe() 
 {
+    $(`#double`).hide();
     audioCard.play();
     $(`#Stand`).show();
     console.log("SplitFlag is: "+SplitFlag);
@@ -469,14 +496,14 @@ function hitMe()
     // but since we can split, we can make SplitFlag =1 and then #myCard2 will get the next card.
     $(`#myCard${hitMeTimes+2-SplitFlag}`).attr(`src`,`${cardsGifs[newNumber]}`);
     setTimeout(() => {
+        $(`#myCard${hitMeTimes+2-SplitFlag}`).css({ "background-color": "snow", 
+        "border-radius": "15%" ,"padding": "10px","border": "1px solid black","border-width": "thick"});       
+        $(`#myCard${hitMeTimes+2-SplitFlag}`).attr(`src`,`${cards[newNumber]}`);   
         if(temp<21) //21 is great, not show, and 22 and more lets assume is busted
         {
             $(`#Hit`).show();
             $(`#Stand`).show();
-        }
-        $(`#myCard${hitMeTimes+2-SplitFlag}`).css({ "background-color": "snow", 
-        "border-radius": "15%" ,"padding": "10px","border": "1px solid black","border-width": "thick"});       
-      $(`#myCard${hitMeTimes+2-SplitFlag}`).attr(`src`,`${cards[newNumber]}`);    
+        } 
     }, 1000);
 
     checkValue(newNumber); 
@@ -489,15 +516,31 @@ function hitMe()
     {
         $(`#show${hitMeTimes+2-SplitFlag}`).append(`<p id="A2">${temp-(10)*index}</p>`);
     }
-    if(temp==21)
+    if(temp==21 && hitMeTimes==1 && SplitFlag==1)
+    {
+        console.log(hitMeTimes + ''+ SplitFlag);
+        $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
+            <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
+            <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
+            <b> BlackJack! Well Done! </b></p>`);
+            $(`#Hit`).hide();
+            $(`#Stand`).hide();
+            setTimeout(() => {
+                StandFunction();
+            }, 1100); 
+    }
+    else if(temp==21)
     {
         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
             <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
             <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
             <b> 21! Well Done! </b></p>`);
             $(`#Hit`).hide();
-            $(`#Stand`).hide(); 
-            StandFunction();
+            $(`#Stand`).hide();
+            setTimeout(() => {
+                StandFunction();
+            }, 1100); 
+        
     }
     else if(temp>21)
     {
@@ -518,7 +561,10 @@ function hitMe()
                     <b> 21! Well Done! </b></p>`);
                     $(`#Hit`).hide();
                     $(`#Stand`).hide(); 
-                    StandFunction();
+                    setTimeout(() => {
+                        StandFunction();
+                    }, 1100); 
+                    
                     if(SplitFlag==1)
                     {
                         $(`#HitSplit`).show();
@@ -536,6 +582,10 @@ function hitMe()
                     //$(`#StandSplit`).show();
                     $(`.firstBtn`).hide();
                 }
+                else
+                {
+                    $(`#buttonPlay`).show();
+                }
             }
 
         }
@@ -548,6 +598,10 @@ function hitMe()
                 $(`#HitSplit`).show();
                 //$(`#StandSplit`).show();
                 $(`.firstBtn`).hide();
+            }
+            else
+            {
+                $(`#buttonPlay`).show();
             }
         }
     }
@@ -593,8 +647,21 @@ function hitMeSplit()
     {
         $(`#show${hitMeTimesSplit+7}`).append(`<p id="A2">${temp2-(10)*index}</p>`);
     }
-    if(temp2==21)
+
+    if(temp2==21 && hitMeTimesSplit==1)
     {
+        console.log(hitMeTimesSplit);
+        $(`.messagesSplit`).append(`<p id="HitSplit" class="col-10 alert alert-warning" role="alert">
+            <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
+            <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
+            <b> BlackJack! Well Done! </b></p>`);
+            $(`#HitSplit`).hide();
+            $(`#StandSplit`).hide(); 
+            StandFunction();
+    }
+    else if(temp2==21)
+    {
+        console.log(hitMeTimesSplit);
         $(`.messagesSplit`).append(`<p id="HitSplit" class="col-10 alert alert-warning" role="alert">
             <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
             <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
@@ -622,6 +689,7 @@ function hitMeSplit()
                     <b> 21! Well Done! </b></p>`);
                     $(`#HitSplit`).hide();
                     $(`#StandSplit`).hide(); 
+                    StandFunction();
             }
             else if(temp2>21)
             {
@@ -630,6 +698,10 @@ function hitMeSplit()
                 if(temp<22)
                 {
                     StandFunction();
+                }
+                else
+                {
+                    $(`#buttonPlay`).show();
                 }
             }
 
@@ -641,6 +713,10 @@ function hitMeSplit()
             if(temp<22)
             {
                 StandFunction();
+            }
+            else
+            {
+                $(`#buttonPlay`).show();
             }
         }
     }

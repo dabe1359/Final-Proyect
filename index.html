@@ -19,13 +19,16 @@
   <body>
 
 
+    <div id="buttonPlay">
     <button id="PlayBtn" class="play btn btn-danger d-block mx-auto""> <b>Play! </b> 
       <img src="https://img.icons8.com/ios/50/000000/cards.png"/></button>
+    </div>
     <div id="show"></div>
     <br><br>
 
-    <div class="container">
-      <div class="row">
+    <div id="table">
+    <div class="container w-50">
+      <div id="dealersCards" class="row">
         <img id="DealerCard1" class="col-2 CardBack" src="images/backCard.png" />
         <img id="DealerCard2" class="col-2 CardBack" src="images/backCard.png"/>
         <img id="DealerCard3" class="col-2" src=""/>
@@ -79,6 +82,7 @@
       <p class="col-sm-1"></p>
       <p id="Hit" class="col-2 btn btn-success">Hit Me!</p>
       <p id="Stand" class="col-2 btn btn-success">Stand</p>
+      <p id="double" class="col-2 btn btn-success">Double</p>
       <p id="SplitMe" class="col-2 btn btn-success">Split!</p>
       <p class="col-sm"></p>
     </div>
@@ -88,13 +92,17 @@
       <p id="StandSplit" class="col-2 btn btn-primary">Stand</p>
       <p class="col-sm"></p>
     </div>
-    <div class="messages row">
-
-    </div>
-    <div class="messagesSplit row">
-
-    </div>
   </div>
+
+</div> <!--Table-->
+<div class="container w-50">
+<div class="messages row">
+
+</div>
+<div class="messagesSplit row">
+
+</div>
+</div>
   
     
         <br><br>
