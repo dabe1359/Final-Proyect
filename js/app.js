@@ -10,8 +10,9 @@ for(var i =0;i<suites.length;i++)
 }
 
 //Make to play with money... array of objects...
+// arreglar el show number, quizas meterle fichas de casino...
 //Work on the Design
-// Play Button does not dissapear
+//Play Button does not dissapear
 
 var suites2 = [2,3,4,5,6,7,8,9,10, 'j','q','k','a'];
 var cardsGifs = [];
@@ -50,6 +51,9 @@ var splitCheck2;
 var splitNumber;
 var SplitFlag =0;
 var alternativeFlag =0;
+var audioCard = new Audio('Sounds/OneCardSound.mp3');
+var audio3Cards = new Audio('Sounds/Cards3Sound.mp3');
+var audioCardsMult = new Audio('Sounds/MultipleCardsSound.mp3');
 
 //var busted =false;
 $(`#Hit`).hide();
@@ -60,6 +64,7 @@ $(`#SplitMe`).on(`click`,SplitFunct);
 
 function SplitFunct()
 {
+    audioCard.play();
     $(`#Stand`).hide();
     $(`#StandSplit`).hide();
     SplitFlag =1;
@@ -71,6 +76,8 @@ function SplitFunct()
     $(`#show2`).html(``);
     $(`#myCard7`).attr(`src`,`${cardsGifs[splitNumber]}`);
     setTimeout(() => {
+        $(`#myCard7`).css({ "background-color": "snow", "border-radius": "15%" ,
+        "padding": "10px","border": "1px solid black","border-width": "thick"});
       $(`#myCard7`).attr(`src`,`${cards[splitNumber]}`);   
     }, 1000);
     $(`#myCard2`).replaceWith(`<img id="myCard2" class="col-2 CardBack" src="images/backCard.png"/>`);
@@ -84,6 +91,7 @@ $(`#PlayBtn`).on(`click`, PlayMe);
 
 function PlayMe()
 {
+    audioCardsMult.play();
     $(`#PlayBtn`).hide();
     $(`.firstBtn`).show();
     $(`#SplitMe`).hide();
@@ -138,11 +146,15 @@ function PlayMe()
 
     $(`#DealerCard1`).attr(`src`,`${cardsGifs[dealerNum1]}`);
     setTimeout(() => {
+        $(`#DealerCard1`).css({ "background-color": "snow", "border-radius": "15%" ,
+        "padding": "10px","border": "1px solid black","border-width": "thick"});
       $(`#DealerCard1`).attr(`src`,`${cards[dealerNum1]}`);    
     }, 1000);
 
     $(`#DealerCard2`).attr(`src`,`images/Cards_Close_Gifs/BackAnim.gif`);
     setTimeout(() => {
+        $(`#DealerCard2`).css({ "background-color": "darkblue", "border-radius": "15%" ,
+        "padding": "10px","border": "1px solid black","border-width": "thick"});
       $(`#DealerCard2`).attr(`src`,`images/backCard.png`);   
     }, 1000);
 
@@ -166,6 +178,12 @@ function PlayMe()
         $(`#Dealershow2`).append(`<p id="DealerA2">${dealerTemp-10}</p>`);
     }  
 
+    if(dealerTemp==22) // dealer received A and A
+    {
+        dealerTemp-=10;
+        dealerAQuantity-=1;
+    }
+
     $(`#Dealershow1`).hide();
     $(`#Dealershow2`).hide();
 
@@ -176,11 +194,15 @@ function PlayMe()
 
     $(`#myCard1`).attr(`src`,`${cardsGifs[num1]}`);
     setTimeout(() => {
+        $(`#myCard1`).css({ "background-color": "snow", "border-radius": "15%" ,
+        "padding": "10px","border": "1px solid black","border-width": "thick"});
       $(`#myCard1`).attr(`src`,`${cards[num1]}`);    
     }, 1000);
 
     $(`#myCard2`).attr(`src`,`${cardsGifs[num2]}`);
     setTimeout(() => {
+        $(`#myCard2`).css({ "background-color": "snow", "border-radius": "15%" ,
+        "padding": "10px","border": "1px solid black","border-width": "thick"});
       $(`#myCard2`).attr(`src`,`${cards[num2]}`);   
     }, 1000);
 
@@ -249,6 +271,15 @@ function StandFunction()
     }
     else
     {
+        if(dealerTemp<17)
+        {
+            audio3Cards.play();
+        }
+        else
+        {
+            audioCard.play();
+        }
+
         if(alternativeFlag==1)
         {
             SplitFlag =1;
@@ -262,6 +293,8 @@ function StandFunction()
         $(`#Dealershow1`).show();
 
         $(`#DealerCard2`).attr(`src`,`${cardsGifs[dealerNum2]}`);
+
+        $(`#DealerCard2`).css({ "background-color": "snow"})
         setTimeout(() => {
         $(`#Dealershow2`).show();
         $(`#DealerCard2`).attr(`src`,`${cards[dealerNum2]}`);   
@@ -413,12 +446,15 @@ function StandFunction()
 function replaceCard(numbersC, card)
 {
     setTimeout(() => {
+        $(`#DealerCard${numbersC+2}`).css({ "background-color": "snow", "border-radius": "15%" ,
+        "padding": "10px","border": "1px solid black","border-width": "thick"});
         $(`#DealerCard${numbersC+2}`).attr(`src`,`${cards[card]}`);
     }, 1000*(numbersC+1));
 }
 
 function hitMe() 
 {
+    audioCard.play();
     $(`#Stand`).show();
     console.log("SplitFlag is: "+SplitFlag);
     //busted=false;
@@ -438,6 +474,8 @@ function hitMe()
             $(`#Hit`).show();
             $(`#Stand`).show();
         }
+        $(`#myCard${hitMeTimes+2-SplitFlag}`).css({ "background-color": "snow", 
+        "border-radius": "15%" ,"padding": "10px","border": "1px solid black","border-width": "thick"});       
       $(`#myCard${hitMeTimes+2-SplitFlag}`).attr(`src`,`${cards[newNumber]}`);    
     }, 1000);
 
@@ -522,6 +560,7 @@ $(`#StandSplit`).on(`click`,``);
 
 function hitMeSplit() 
 {
+    audioCard.play();
     //busted=false;
     $(`#HitSplit`).hide();
     $(`#StandSplit`).hide();
@@ -536,10 +575,14 @@ function hitMeSplit()
             $(`#HitSplit`).show();
             $(`#StandSplit`).show();
         }
+        $(`#myCard${hitMeTimesSplit+7}`).css({ "background-color": "snow", "border-radius": "15%" ,
+        "padding": "10px","border": "1px solid black","border-width": "thick"});
       $(`#myCard${hitMeTimesSplit+7}`).attr(`src`,`${cards[newNumber]}`);    
     }, 1000);
 
     checkValue(newNumber); 
+
+    $(`#show${hitMeTimesSplit+6}`).html(temp2);
 
     temp2 += value;
 
