@@ -18,83 +18,171 @@
   </head>
   <body>
 
-
-    <div id="buttonPlay">
-    <button id="PlayBtn" class="play btn btn-danger d-block mx-auto""> <b>Play! </b> 
-      <img src="https://img.icons8.com/ios/50/000000/cards.png"/></button>
-    </div>
-    <div id="show"></div>
-    <br><br>
+    <div id="Logo"><img id="logoBlack" src="images/BlackJack.gif"></div>
 
     <div id="table">
-    <div class="container w-50">
-      <div id="dealersCards" class="row">
-        <img id="DealerCard1" class="col-2 CardBack" src="images/backCard.png" />
-        <img id="DealerCard2" class="col-2 CardBack" src="images/backCard.png"/>
-        <img id="DealerCard3" class="col-2" src=""/>
-        <img id="DealerCard4" class="col-2" src=""/>
-        <img id="DealerCard5" class="col-2" src=""/>
-        <img id="DealerCard6" class="col-2" src=""/>    
-    </div>
-    <div class="row">
-      <p id="Dealershow1" class="col-2"></p>
-      <p id="Dealershow2" class="col-2"></p>
-      <p id="Dealershow3" class="col-2"></p>
-      <p id="Dealershow4" class="col-2"></p>
-      <p id="Dealershow5" class="col-2"></p>
-      <p id="Dealershow6" class="col-2"></p>     
-   </div>
-      <div class="row">
-      </div>
-      <div class="row">
-          <img id="myCard1" class="col-2 CardBack" src="images/backCard.png" />
-          <img id="myCard2" class="col-2 CardBack" src="images/backCard.png"/>
-          <img id="myCard3" class="col-2" src=""/>
-          <img id="myCard4" class="col-2" src=""/>
-          <img id="myCard5" class="col-2" src=""/>
-          <img id="myCard6" class="col-2" src=""/>    
-      </div>
-      <div class="row">
-        <p id="show1" class="col-2"></p>
-        <p id="show2" class="col-2"></p>
-        <p id="show3" class="col-2"></p>
-        <p id="show4" class="col-2"></p>
-        <p id="show5" class="col-2"></p>
-        <p id="show6" class="col-2"></p>     
-     </div>
-      <div class="split row">
-        <img id="myCard7" class="col-2 CardBack" src="images/backCard.png" />
-        <img id="myCard8" class="col-2 CardBack" src="images/backCard.png"/>
-        <img id="myCard9" class="col-2" src=""/>
-        <img id="myCard10" class="col-2" src=""/>
-        <img id="myCard11" class="col-2" src=""/>
-        <img id="myCard12" class="col-2" src=""/>    
-    </div>
-     <div class="split row">
-      <p id="show7" class="col-2"></p>
-      <p id="show8" class="col-2"></p>
-      <p id="show9" class="col-2"></p>
-      <p id="show10" class="col-2"></p>
-      <p id="show11" class="col-2"></p>
-      <p id="show12" class="col-2"></p>     
-   </div>
-     <div class="firstBtn row">
-      <p class="col-sm-1"></p>
-      <p id="Hit" class="col-2 btn btn-success">Hit Me!</p>
-      <p id="Stand" class="col-2 btn btn-success">Stand</p>
-      <p id="double" class="col-2 btn btn-success">Double</p>
-      <p id="SplitMe" class="col-2 btn btn-success">Split!</p>
-      <p class="col-sm"></p>
-    </div>
-    <div class="split row">
-      <p class="col-sm-1"></p>
-      <p id="HitSplit" class="col-2 btn btn-primary">Hit Me!</p>
-      <p id="StandSplit" class="col-2 btn btn-primary">Stand</p>
-      <p class="col-sm"></p>
-    </div>
-  </div>
 
-</div> <!--Table-->
+      <div id="carouselId" class="carousel slide w-75 d-block mx-auto" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <div id="addGameCaroussel" class="carousel-item active">
+            <a id="game1" class="w-75 d-block mx-auto" alt="First slide">
+              <div class="container">
+                <div id="decoration" class="row">
+                  <img class="col-2 decoration" src="images/backCard.png" />
+                  <img class="col-2 decoration" src="images/backCard.png"/>
+                  <img class="col-2" src=""/>
+                  <img class="col-2" src=""/>
+                  <img class="col-2" src=""/>
+                  <img iclass="col-2" src=""/>    
+              </div>
+              <div class="decoration row">
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>     
+             </div>
+                <div class="row">
+                </div>
+                <div class="row">
+                    <img class="col-2 CardBack" src="images/backCard.png" />
+                    <img class="col-2 CardBack" src="images/backCard.png"/>
+                    <img class="col-2" src=""/>
+                    <img class="col-2" src=""/>
+                    <img class="col-2" src=""/>
+                    <img class="col-2" src=""/>    
+                </div>
+                <div class="showing row">
+                  <p class="col-2"></p>
+                  <p class="col-2"></p>
+                  <p class="col-2"></p>
+                  <p class="col-2"></p>
+                  <p class="col-2"></p>
+                  <p class="col-2"></p>     
+               </div>
+                <div class="split row">
+                  <img class="col-2 CardBack" src="images/backCard.png" />
+                  <img class="col-2 CardBack" src="images/backCard.png"/>
+                  <img class="col-2" src=""/>
+                  <img class="col-2" src=""/>
+                  <img class="col-2" src=""/>
+                  <img class="col-2" src=""/>    
+              </div>
+               <div class="showing split row">
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>
+                <p class="col-2"></p>     
+             </div>
+               <div class="firstBtn row">
+                <p class="col-sm-1"></p>
+                <p class="col-2 "></p>
+                <p class="col-2 "></p>
+                <p class="col-2 "></p>
+                <p class="col-2 "></p>
+                <p class="col-sm"></p>
+              </div>
+              <div class="split row">
+                <p class="col-sm-1"></p>
+                <p class="col-2 "></p>
+                <p class="col-2 "></p>
+                <p class="col-sm"></p>
+              </div>
+            </div>
+
+            </a>
+          </div>
+          <div class="carousel-item">
+            <a id="game2" class="w-75 d-block mx-auto" alt="Second slide">
+              <div class="container">
+                <div id="dealersCards" class="row">
+                  <img id="DealerCard1" class="col-2 CardBack" src="images/backCard.png" />
+                  <img id="DealerCard2" class="col-2 CardBack" src="images/backCard.png"/>
+                  <img id="DealerCard3" class="col-2" src=""/>
+                  <img id="DealerCard4" class="col-2" src=""/>
+                  <img id="DealerCard5" class="col-2" src=""/>
+                  <img id="DealerCard6" class="col-2" src=""/>    
+              </div>
+              <div class="showing row">
+                <p id="Dealershow1" class="col-2"></p>
+                <p id="Dealershow2" class="col-2"></p>
+                <p id="Dealershow3" class="col-2"></p>
+                <p id="Dealershow4" class="col-2"></p>
+                <p id="Dealershow5" class="col-2"></p>
+                <p id="Dealershow6" class="col-2"></p>     
+             </div>
+                <div class="row">
+                </div>
+                <div class="row">
+                    <img id="myCard1" class="col-2 CardBack" src="images/backCard.png" />
+                    <img id="myCard2" class="col-2 CardBack" src="images/backCard.png"/>
+                    <img id="myCard3" class="col-2" src=""/>
+                    <img id="myCard4" class="col-2" src=""/>
+                    <img id="myCard5" class="col-2" src=""/>
+                    <img id="myCard6" class="col-2" src=""/>    
+                </div>
+                <div class="showing row">
+                  <p id="show1" class="col-2"></p>
+                  <p id="show2" class="col-2"></p>
+                  <p id="show3" class="col-2"></p>
+                  <p id="show4" class="col-2"></p>
+                  <p id="show5" class="col-2"></p>
+                  <p id="show6" class="col-2"></p>     
+               </div>
+                <div class="split row">
+                  <img id="myCard7" class="col-2 CardBack" src="images/backCard.png" />
+                  <img id="myCard8" class="col-2 CardBack" src="images/backCard.png"/>
+                  <img id="myCard9" class="col-2" src=""/>
+                  <img id="myCard10" class="col-2" src=""/>
+                  <img id="myCard11" class="col-2" src=""/>
+                  <img id="myCard12" class="col-2" src=""/>    
+              </div>
+               <div class="showing split row">
+                <p id="show7" class="col-2"></p>
+                <p id="show8" class="col-2"></p>
+                <p id="show9" class="col-2"></p>
+                <p id="show10" class="col-2"></p>
+                <p id="show11" class="col-2"></p>
+                <p id="show12" class="col-2"></p>     
+             </div>
+               <div class="Buttons firstBtn row">
+                <p class="col-sm-1"></p>
+                <p id="Hit" class="col-2 btn btn-danger"><b>Hit Me!</b></p>
+                <p id="Stand" class="col-2 btn btn-light"><b>Stand</b></p>
+                <p id="double" class="col-2 btn btn-dark"><b>Double</b></p>
+                <p id="SplitMe" class="col-2 btn btn-warning"><b>Split!</b></p>
+                <p class="col-sm"></p>
+              </div>
+              <div class="Buttons split row">
+                
+                <p id="HitSplit" class="col-2 btn btn-primary">Hit Me!</p>
+                <p id="StandSplit" class="col-2 btn btn-primary">Stand</p>
+                
+              </div>
+            </div>
+
+            </a>
+          </div>
+        </div>
+        <a class="prev carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
+          <span class="prev" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
+        
+        <a class="PlayButton carousel-control-next" href="#carouselId" role="button" data-slide="next">
+          <div id="buttonPlay">
+             <button id="PlayBtn" class="play btn btn-danger d-block mx-auto"><b>Play! </b> 
+              <img src="https://img.icons8.com/ios/50/000000/cards.png"/></button>
+            </div>
+          <div id="show"></div>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+    </div> <!--Table-->
 <div class="container w-50">
 <div class="messages row">
 

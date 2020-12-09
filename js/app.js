@@ -1,3 +1,7 @@
+$('.carousel').carousel({
+    interval: false,
+  });
+
 var suites = [2,3,4,5,6,7,8,9,10, 'jack','queen','king','ace'];
 var cards = [];
 
@@ -8,8 +12,10 @@ for(var i =0;i<suites.length;i++)
     cards.push(`images/${suites[i]}_of_diamonds.png`);
     cards.push(`images/${suites[i]}_of_clubs.png`);
 }
+//$(`#table`).hide();
 
-//Make to play with money... array of objects...
+//Make your bets please and then carrousel...... array of objects...
+// Make the buttons to the right, its much better 
 // arreglar el show number, quizas meterle fichas de casino...
 // double function for only up
 //Work on the Design
@@ -31,6 +37,7 @@ for(var j =0;j<cards.length;j++)
     $(`.adding`).append(`<img src="${cards[j]}" class= "col-6 col-md-3">`);
 }
 
+//var carousel_i = 2;
 var dealerNum1 ;
 var dealerNum2 ;
 var dealerTemp;
@@ -99,15 +106,24 @@ function doubleFunct()
 
 }
 
-document.getElementById("show").innerHTML= num1+ " "+num2;
-
 $(`#PlayBtn`).on(`click`, PlayMe);
 
 $(`#double`).hide();
 $(`#Stand`).hide();
 
+var skipOnce = 0;
+
 function PlayMe()
 {
+
+    if(skipOnce>0)
+    {
+        setTimeout(() => {
+            $(`.prev`).trigger(`click`);
+        }, 800);
+    }
+    skipOnce++;
+
     audioCardsMult.play();
     $(`#buttonPlay`).hide();
     $(`.firstBtn`).show();
@@ -170,9 +186,10 @@ function PlayMe()
 
     $(`#DealerCard2`).attr(`src`,`images/Cards_Close_Gifs/BackAnim.gif`);
     setTimeout(() => {
-        $(`#DealerCard2`).css({ "background-color": "darkblue", "border-radius": "15%" ,
-        "padding": "10px","border": "1px solid black","border-width": "thick"});
-      $(`#DealerCard2`).attr(`src`,`images/backCard.png`);   
+      $(`#DealerCard2`).attr(`src`,``);
+      $(`#DealerCard2`).css({ "background-image": "url(../images/backCard.png)", 
+      "background-repeat" : "no-repeat" ,"background-size" : "100% 100%" ,"border-radius": "15%" ,
+      "padding": "10px","border": "1px solid black","border-width": "thick"}); 
     }, 1000);
 
 
@@ -206,7 +223,7 @@ function PlayMe()
 
     num1 = Math.round(Math.random()*51);
     num2 = Math.round(Math.random()*51);
-    num1 = num2;
+    //num1 =num2;
 
     $(`#myCard1`).attr(`src`,`${cardsGifs[num1]}`);
     setTimeout(() => {
@@ -315,6 +332,8 @@ function StandFunction()
 
         $(`#Dealershow1`).show();
 
+        $(`#DealerCard2`).css({ "background-image": "none", "all": "none"});
+
         $(`#DealerCard2`).attr(`src`,`${cardsGifs[dealerNum2]}`);
 
         $(`#DealerCard2`).css({ "background-color": "snow"})
@@ -324,6 +343,9 @@ function StandFunction()
                 $(`#buttonPlay`).show();
             }
             $(`#Dealershow2`).show();
+
+            $(`#DealerCard2`).css({ "background-color": "snow", "border-radius": "15%" ,
+            "padding": "10px","border": "1px solid black","border-width": "thick"});
             $(`#DealerCard2`).attr(`src`,`${cards[dealerNum2]}`);   
         }, 1000);
 
@@ -750,7 +772,7 @@ function checkValue(num)
             }
             splitNumber = num;
             setTimeout(() => {
-                alert('You can split now, do you want?');
+                //alert('You can split now, do you want?');
                 $(`#SplitMe`).show();
             }, 1100);
         }
@@ -800,3 +822,4 @@ function DealercheckValue(num)
     }
 
 }
+

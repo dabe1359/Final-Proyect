@@ -7,28 +7,50 @@ img
     border-radius: 15%;
 }
 */
+#Logo
+{
+    text-align: center;
+}
 
 body
 {
-    background-color: chartreuse;
-    color: darkblue;
+    background-color: #292b2c;
+}
+#dealersCards, #decoration
+{
+    padding-top: 3%;
+}
+
+.Buttons :hover
+{
+    cursor: pointer;
 }
 
 #table
 {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2%;
     padding-bottom: 1%;
     width: 80%;
     height: 80%;
-    border: 1px solid black;
+    border: 15px solid black;
     border-radius: 40%;
+    background-color: #5d9c00;
 
 }
-
+#Hit,#Stand,#double,#SplitMe,#HitSplit,#StandSplit,#PlayBtn
+{
+    border: 4px solid rgb(38, 36, 36);
+}
 
 #dealersCards
 {
     margin-top: 2%;
+}
+
+.showing>p
+{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 650;
 }
