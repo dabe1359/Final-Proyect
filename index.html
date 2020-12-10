@@ -18,7 +18,7 @@
   </head>
   <body>
 
-    <div id="Logo"><img id="logoBlack" src="images/BlackJack.gif"></div>
+    <div id="Logo"><img id="logoBlack" src="images/BlackJack.gif"><img id="BetMin" src="images/Bets.png"></div>
 
     <div id="table">
 
@@ -28,12 +28,12 @@
             <a id="game1" class="w-75 d-block mx-auto" alt="First slide">
               <div class="container">
                 <div id="decoration" class="row">
-                  <img class="col-2 decoration" src="images/backCard.png" />
-                  <img class="col-2 decoration" src="images/backCard.png"/>
-                  <img class="col-2" src=""/>
-                  <img class="col-2" src=""/>
-                  <img class="col-2" src=""/>
-                  <img iclass="col-2" src=""/>    
+                  <img id="Chips1" class="col-2 betChips" src="images/Bets/defaultColorTable.png" />
+                  <img id="Chips5" class="col-2 betChips" src="images/Bets/defaultColorTable.png"/>
+                  <img id="Chips25" class="col-2 betChips" src="images/Bets/defaultColorTable.png"/>
+                  <img id="Chips50" class="col-2 betChips" src="images/Bets/defaultColorTable.png"/>
+                  <img id="Chips100" class="col-2 betChips" src="images/Bets/defaultColorTable.png"/>
+                  <p id="balance" class="col-2"></p>
               </div>
               <div class="decoration row">
                 <p class="col-2"></p>
@@ -45,20 +45,20 @@
              </div>
                 <div class="row">
                 </div>
-                <div class="row">
-                    <img class="col-2 CardBack" src="images/backCard.png" />
-                    <img class="col-2 CardBack" src="images/backCard.png"/>
-                    <img class="col-2" src=""/>
-                    <img class="col-2" src=""/>
-                    <img class="col-2" src=""/>
-                    <img class="col-2" src=""/>    
+                <div class="showChips row">
+                    <img id="Coin1" class="Chips col-2" src="images/Bets/1.png" />
+                    <img id="Coin5" class="Chips col-2" src="images/Bets/5.png" />
+                    <img id="Coin25" class="Chips col-2" src="images/Bets/25.png" />
+                    <img id="Coin50" class="Chips col-2" src="images/Bets/50.png" />
+                    <img id="Coin100" class="Chips col-2" src="images/Bets/100.png" />
+                    <p id="bet" class="col-2"></p> 
                 </div>
                 <div class="showing row">
-                  <p class="col-2"></p>
-                  <p class="col-2"></p>
-                  <p class="col-2"></p>
-                  <p class="col-2"></p>
-                  <p class="col-2"></p>
+                  <i id="arrowBlue" class="col-2 fas fa-arrow-alt-circle-down"></i>
+                  <i id="arrowPurple" class="col-2 fas fa-arrow-alt-circle-down"></i>
+                  <i id="arrowRed" class="col-2 fas fa-arrow-alt-circle-down"></i>
+                  <i id="arrowGreen" class="col-2 fas fa-arrow-alt-circle-down"></i>
+                  <i id="arrowBlack" class="col-2 fas fa-arrow-alt-circle-down"></i>
                   <p class="col-2"></p>     
                </div>
                 <div class="split row">
@@ -112,7 +112,7 @@
                 <p id="Dealershow3" class="col-2"></p>
                 <p id="Dealershow4" class="col-2"></p>
                 <p id="Dealershow5" class="col-2"></p>
-                <p id="Dealershow6" class="col-2"></p>     
+                <p id="Dealershow6" class="col-2"></p>  
              </div>
                 <div class="row">
                 </div>
@@ -122,7 +122,7 @@
                     <img id="myCard3" class="col-2" src=""/>
                     <img id="myCard4" class="col-2" src=""/>
                     <img id="myCard5" class="col-2" src=""/>
-                    <img id="myCard6" class="col-2" src=""/>    
+                    <img id="myCard6" class="col-2" src=""/>   
                 </div>
                 <div class="showing row">
                   <p id="show1" class="col-2"></p>
@@ -148,33 +148,29 @@
                 <p id="show11" class="col-2"></p>
                 <p id="show12" class="col-2"></p>     
              </div>
-               <div class="Buttons firstBtn row">
-                <p class="col-sm-1"></p>
-                <p id="Hit" class="col-2 btn btn-danger"><b>Hit Me!</b></p>
-                <p id="Stand" class="col-2 btn btn-light"><b>Stand</b></p>
-                <p id="double" class="col-2 btn btn-dark"><b>Double</b></p>
-                <p id="SplitMe" class="col-2 btn btn-warning"><b>Split!</b></p>
-                <p class="col-sm"></p>
-              </div>
-              <div class="Buttons split row">
-                
-                <p id="HitSplit" class="col-2 btn btn-primary">Hit Me!</p>
-                <p id="StandSplit" class="col-2 btn btn-primary">Stand</p>
-                
-              </div>
+               
             </div>
 
             </a>
           </div>
         </div>
-        <a class="prev carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
-          <span class="prev" aria-hidden="true"></span>
+        <a id="ChangeCarrousell" class="carousel-control-prev" href="#carouselId" role="button">
+          <p class="Buttons Btns1">
+            <span id="Hit" class="btn btn-danger"><b>Hit Me!</b></span>
+            <span id="Stand" class="btn btn-light"><b>Stand</b></span>
+            <span id="double" class="btn btn-dark"><b>Double</b></span>
+            <span id="SplitMe" class="btn btn-warning"><b>Split!</b></span>
+          </p>
+          <p class="Buttons split row">
+            <span id="HitSplit" class="btn btn-primary">Hit Me!</span>
+            <span id="StandSplit" class="btn btn-primary">Stand</span>   
+          </p>    
           <span class="sr-only"></span>
         </a>
         
         <a class="PlayButton carousel-control-next" href="#carouselId" role="button" data-slide="next">
           <div id="buttonPlay">
-             <button id="PlayBtn" class="play btn btn-danger d-block mx-auto"><b>Play! </b> 
+             <button id="PlayBtn" class="play btn btn-danger d-block mx-auto"><b><i>Play! </i></b> 
               <img src="https://img.icons8.com/ios/50/000000/cards.png"/></button>
             </div>
           <div id="show"></div>

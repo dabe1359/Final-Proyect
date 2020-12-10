@@ -38,10 +38,22 @@ body
     background-color: #5d9c00;
 
 }
-#Hit,#Stand,#double,#SplitMe,#HitSplit,#StandSplit,#PlayBtn
+#Hit,#Stand,#double,#SplitMe,#HitSplit,#StandSplit
 {
+    margin-top: 10px;
     border: 4px solid rgb(38, 36, 36);
+    width: 120px;
+    margin-right: 130px;
 }
+#PlayBtn
+{
+    margin-top: 10px;
+    border: 4px solid rgb(38, 36, 36);
+    width: 110px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
 
 #dealersCards
 {
@@ -53,4 +65,90 @@ body
     text-align: center;
     font-size: 22px;
     font-weight: 650;
+}
+
+.Chips
+{
+    height: 90px;
+    cursor: pointer;
+}
+
+.betChips
+{
+    height: 40px;
+}
+
+#balance
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 450;
+    font-size: 24px;
+    text-align: center;
+    color: whitesmoke;
+}
+#bet
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 550;
+    font-size: 24px;
+    text-align: center;
+    color: black;
+}
+#BetMin
+{
+    width: 130px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+.showChips
+{
+    font-size: 24px;
+}
+
+#arrowBlue
+{
+    /*display: none;*/
+    cursor: pointer;
+    margin-left: 3%;
+    margin-top: 1%;
+    font-size: 50px;
+    color: rgb(9, 85, 129);
+    /*transform: scale(0);*/
+}
+
+#arrowPurple
+{
+    /*display: none;*/
+    cursor: pointer;
+    margin-left: 0%;
+    margin-top: 1%;
+    font-size: 50px;
+    color: rgb(80, 9, 80);
+}
+#arrowRed
+{
+    /*display: none;*/
+    cursor: pointer;
+    margin-left: 0%;
+    margin-top: 1%;
+    font-size: 50px;
+    color: rgb(130, 4, 4);
+}
+#arrowGreen
+{
+    /*display: none;*/
+    cursor: pointer;
+    margin-left: 0%;
+    margin-top: 1%;
+    font-size: 50px;
+    color: rgb(12, 70, 4);
+}
+#arrowBlack
+{
+    /*display: none;*/
+    cursor: pointer;
+    margin-left: 0%;
+    margin-top: 1%;
+    font-size: 50px;
+    color: rgb(15, 19, 15);
 }
