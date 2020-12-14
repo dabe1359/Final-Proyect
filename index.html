@@ -18,7 +18,10 @@
   </head>
   <body>
 
-    <div id="Logo"><img id="logoBlack" src="images/BlackJack.gif"><img id="BetMin" src="images/Bets.png"></div>
+    <div id="Logo" class="container">
+      <img id="logoBlack" src="images/BlackJack.gif">
+       <span id="BetList"><u>Min: $1</u><u id="Max">Max: $100</u></span>
+      </div>
 
     <div id="table">
 
@@ -61,9 +64,9 @@
                   <i id="arrowBlack" class="col-2 fas fa-arrow-alt-circle-down"></i>
                   <p class="col-2"></p>     
                </div>
-                <div class="split row">
-                  <img class="col-2 CardBack" src="images/backCard.png" />
-                  <img class="col-2 CardBack" src="images/backCard.png"/>
+                <div class="decoration row">
+                  <img class="col-2 decoration" src=""/>
+                  <img class="col-2 decoration" src=""/>
                   <img class="col-2" src=""/>
                   <img class="col-2" src=""/>
                   <img class="col-2" src=""/>
@@ -154,9 +157,10 @@
             </a>
           </div>
         </div>
-        <a id="ChangeCarrousell" class="carousel-control-prev" href="#carouselId" role="button">
+        <a id="ChangeCarrousell" class="carousel-control-prev" role="button">
           <p class="Buttons Btns1">
-            <span id="Hit" class="btn btn-danger"><b>Hit Me!</b></span>
+            <b id="noCash"><img id="ATM" src="images/Bets/ATM.png" alt=""></b>
+            <span id="Hit" class="btn btn-danger "><b>Hit Me!</b></span>
             <span id="Stand" class="btn btn-light"><b>Stand</b></span>
             <span id="double" class="btn btn-dark"><b>Double</b></span>
             <span id="SplitMe" class="btn btn-warning"><b>Split!</b></span>
@@ -168,11 +172,11 @@
           <span class="sr-only"></span>
         </a>
         
-        <a class="PlayButton carousel-control-next" href="#carouselId" role="button" data-slide="next">
+        <a class="PlayButton carousel-control-next" href="#carouselId" role="button" data-slide="next"> 
           <div id="buttonPlay">
              <button id="PlayBtn" class="play btn btn-danger d-block mx-auto"><b><i>Play! </i></b> 
               <img src="https://img.icons8.com/ios/50/000000/cards.png"/></button>
-            </div>
+          </div>
           <div id="show"></div>
           <span class="sr-only">Next</span>
         </a>
@@ -188,7 +192,7 @@
 </div>
 </div>
   
-    
+    <!--
         <br><br>
         <div class="container">
             <div class="row">
@@ -201,12 +205,12 @@
             </div>
         </div>
 
-    <div class="container">
-      <div class="adding" class="row">
-      
+      <div class="container">
+        <div class="adding" class="row">
+        
+        </div>
       </div>
-    </div>
-
+    --> 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

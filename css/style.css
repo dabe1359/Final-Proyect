@@ -7,10 +7,6 @@ img
     border-radius: 15%;
 }
 */
-#Logo
-{
-    text-align: center;
-}
 
 body
 {
@@ -29,7 +25,7 @@ body
 #table
 {
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 280px;
     padding-bottom: 1%;
     width: 80%;
     height: 80%;
@@ -107,6 +103,7 @@ body
 
 #arrowBlue
 {
+    transform: scale(0);
     /*display: none;*/
     cursor: pointer;
     margin-left: 3%;
@@ -118,6 +115,7 @@ body
 
 #arrowPurple
 {
+    transform: scale(0);
     /*display: none;*/
     cursor: pointer;
     margin-left: 0%;
@@ -127,6 +125,7 @@ body
 }
 #arrowRed
 {
+    transform: scale(0);
     /*display: none;*/
     cursor: pointer;
     margin-left: 0%;
@@ -136,6 +135,7 @@ body
 }
 #arrowGreen
 {
+    transform: scale(0);
     /*display: none;*/
     cursor: pointer;
     margin-left: 0%;
@@ -145,10 +145,63 @@ body
 }
 #arrowBlack
 {
+    transform: scale(0);
     /*display: none;*/
     cursor: pointer;
     margin-left: 0%;
     margin-top: 1%;
     font-size: 50px;
     color: rgb(15, 19, 15);
+}
+
+#carouselId>.PlayButton {
+    top: 50%;
+    bottom: 50%;
+    width: 5%;
+}
+
+#BetList
+{
+    display: inline-block;
+    text-align: center;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 20px;
+    list-style: none;
+    color: rgb(196, 7, 7);
+    border-style: outset;
+    border: 3px solid whitesmoke;
+    width : 130px;
+    align-items: center;
+    margin-top: 20px;
+      
+}
+#BetList>#Max
+{
+    display: inline-block;
+}
+
+#Logo
+{
+    display: inline-block;
+    margin-left: 350px;
+}
+#logoBlack
+{
+    margin-top: -15px;
+}
+
+#ATM
+{
+    margin: 30px;
+    margin-top: 100px;
+    margin-bottom: 70px;
+    cursor: pointer;
+    width: 140px;
+
+}
+#bet
+{
+    position: absolute;
+    margin-left: 630px;
 }

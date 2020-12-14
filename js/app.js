@@ -15,14 +15,10 @@ for(var i =0;i<suites.length;i++)
 }
 
 
-
-//$(`#table`).hide();
-
-// solo ahora hacer la funcion de minus one bet, plus one in balance, recheck if there is up picture, recheck arrows...
-// put more sounds and see if you can add the ATM Machine and animation
 // 2 errors: one, I can turn right carrousell when playing
 // 2nd: the left carrousell makes me go down some centimeters
-// transform scale is amazing! does not change positions !!!
+//min y max hacer en CSS
+
 
 var suites2 = [2,3,4,5,6,7,8,9,10, 'j','q','k','a'];
 var cardsGifs = [];
@@ -43,6 +39,8 @@ for(var j =0;j<cards.length;j++)
 
 var balance = 100; //initial balance = 100$
 var bet = 0; //initial bed = 0$
+var audioChips = new Audio('Sounds/ChipSound.mp3');
+var won = new Audio('Sounds/winning.mp3');
 
 
 $(`#Coin1`).on(`click`,Add1);
@@ -50,11 +48,91 @@ $(`#Coin5`).on(`click`,Add5);
 $(`#Coin25`).on(`click`,Add25);
 $(`#Coin50`).on(`click`,Add50);
 $(`#Coin100`).on(`click`,Add100);
+$(`#ATM`).on(`click`,function(){
+    $(`#ATM`).attr(`src`,`images/Bets/ATMGif.gif`);
+    setTimeout(() => {
+        $(`#ATM`).attr(`src`,`images/Bets/ATM.png`);
+        balance+=100;
+        showCoins();
+        won.play();
+        $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+        $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+    }, 700);
+
+});
 
 $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
 $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
 
 checkIfCanPlay();
+
+$(`#arrowBlue`).on(`click`, Minus1);
+$(`#arrowPurple`).on(`click`, Minus5);
+$(`#arrowRed`).on(`click`, Minus25);
+$(`#arrowGreen`).on(`click`, Minus50);
+$(`#arrowBlack`).on(`click`, Minus100);
+
+$(`#noCash`).hide();
+
+function Minus1()
+{
+    audioChips.play();
+    bet--;
+    balance++;
+    reDistributeChips();
+    showCoins();
+    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+    checkIfCanPlay();
+}
+
+function Minus5()
+{
+    audioChips.play();
+    bet-=5;
+    balance+=5;
+    reDistributeChips();
+    showCoins();
+    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+    checkIfCanPlay();
+}
+
+function Minus25()
+{   
+    audioChips.play();
+    bet-=25;
+    balance+=25;
+    reDistributeChips();
+    showCoins();
+    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+    checkIfCanPlay();
+}
+
+function Minus50()
+{
+    audioChips.play();
+    bet-=50;
+    balance+=50;
+    reDistributeChips();
+    showCoins();
+    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+    checkIfCanPlay();
+}
+
+function Minus100()
+{
+    audioChips.play();
+    bet-=100;
+    balance+=100;
+    reDistributeChips();
+    showCoins();
+    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+    checkIfCanPlay();
+}
 
 function checkIfCanPlay()
 {
@@ -69,64 +147,145 @@ function checkIfCanPlay()
     }
 }
 
+function showCoins()
+{
+    if(balance>=100)
+    {
+        $(`#Coin1`).show();
+        $(`#Coin5`).show();
+        $(`#Coin25`).show();
+        $(`#Coin50`).show();
+        $(`#Coin100`).show();
+        $(`#noCash`).hide();
+    }
+    else if(balance>=50)
+    {
+        $(`#Coin1`).show();
+        $(`#Coin5`).show();
+        $(`#Coin25`).show();
+        $(`#Coin50`).show();
+        $(`#noCash`).hide();
+    }
+    else if(balance>=25)
+    {
+        $(`#Coin1`).show();
+        $(`#Coin5`).show();
+        $(`#Coin25`).show();
+        $(`#noCash`).hide();
+    }
+    else if(balance>=5)
+    {
+        $(`#Coin1`).show();
+        $(`#Coin5`).show();
+        $(`#noCash`).hide();
+    }
+    else if(balance>=1)
+    {
+        $(`#Coin1`).show();
+        $(`#noCash`).hide();
+    }
+    else
+    {
+        $(`#ChangeCarrousell`).show();
+        $(`#noCash`).show();
+    }
+
+}
+
 function Add1()
 {
-
-    bet++;
-    balance--;
-    reDistributeChips();
-    removeChips();
-    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
-    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
-    checkIfCanPlay();
+    if(bet<=99)
+    {
+        audioChips.play();
+        bet++;
+        balance--;
+        reDistributeChips();
+        removeChips();
+        $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+        $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+        checkIfCanPlay();
+    }
+    else
+    {
+        alert(`You cant Add 1$, the Maximum Bet is 100$`);
+    }
 }
 
 function Add5()
 {
-
-    bet+=5;
-    balance-=5;
-    reDistributeChips();
-    removeChips();
-    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
-    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
-    checkIfCanPlay();
+    if(bet<=95)
+    {
+        audioChips.play();
+        bet+=5;
+        balance-=5;
+        reDistributeChips();
+        removeChips();
+        $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+        $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+        checkIfCanPlay();
+    }
+    else
+    {
+        alert(`You cant Add 5$, the Maximum Bet is 100$`);
+    }
 }
 
 function Add25()
-{
-
-    bet+=25;
-    balance-=25;
-    reDistributeChips();
-    removeChips();
-    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
-    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
-    checkIfCanPlay();
+{   
+    if(bet<=75)
+    {
+        audioChips.play();
+        bet+=25;
+        balance-=25;
+        reDistributeChips();
+        removeChips();
+        $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+        $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+        checkIfCanPlay();
+    }
+    else
+    {
+        alert(`You cant Add 25$, the Maximum Bet is 100$`);
+    }
+    
 }
 
 function Add50()
 {
-
-    bet+=50;
-    balance-=50;
-    reDistributeChips();
-    removeChips();
-    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
-    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
-    checkIfCanPlay();
+    if(bet<=50)
+    {
+        audioChips.play();
+        bet+=50;
+        balance-=50;
+        reDistributeChips();
+        removeChips();
+        $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+        $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+        checkIfCanPlay(); 
+    }
+    else
+    {
+        alert(`You cant Add 50$, the Maximum Bet is 100$`);
+    }
 }
 
 function Add100()
 {
-
-    bet+=100;
-    balance-=100;
-    reDistributeChips();
-    removeChips();
-    $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
-    $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
-    checkIfCanPlay();
+    if(bet==0)
+    {
+        audioChips.play();
+        bet+=100;
+        balance-=100;
+        reDistributeChips();
+        removeChips();
+        $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
+        $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+        checkIfCanPlay();
+    }
+    else
+    {
+        alert(`You cant Add 100$, the Maximum Bet is 100$`);
+    }
 }
 
 function reDistributeChips()
@@ -151,8 +310,10 @@ function reDistributeChips()
         $(`#arrowGreen`).css({"transform":"scale(0)"});
         $(`#arrowBlack`).css({"transform":"scale(1)"}); //scale 1 is perfect
     }
+
     else
     {
+        $(`#Chips100`).attr(`src`,`images/Bets/defaultColorTable.png`);
         var fifties = parseInt(bet/50);
         var twentyFives = parseInt((bet-fifties*50)/25);
         var fives = parseInt((bet-fifties*50-twentyFives*25)/5);
@@ -232,7 +393,7 @@ function removeChips()
     if(balance<1)
     {
         $(`#Coin1`).hide();
-        $(`.showChips`).append(`<b>No More Balance! Please Go to the ATM!</b>`);
+        $(`#noCash`).show();
     }
 }
 
@@ -300,7 +461,8 @@ $(`#double`).on(`click`,doubleFunct);
 function doubleFunct()
 {
     $(`#double`).hide();
-    //bid *=2;
+    balance -= bet;
+    bet*=2;
     hitMe();
     setTimeout(() => {
         StandFunction();
@@ -318,7 +480,10 @@ function PlayMe()
 {
     if(flagCanDeal==1)
     {
+        //$(`#PlayBtn>b`).html(`<i><u>Bets! </u></i>`);
+
         flagCanDeal =0;
+        $(`#noCash`).hide();
 
         //$(`.PlayButton`).trigger(`click`);
         //$(`.PlayButton`).attr(`class`,`PlayButton`);
@@ -326,6 +491,7 @@ function PlayMe()
         audioCardsMult.play();
         $(`#double`).hide();
         $(`#buttonPlay`).hide();
+        $(`.PlayButton`).attr(`class`,`PlayButton`);
         $(`.Btns1`).show();
         $(`#SplitMe`).hide();
         $(`.split`).hide();
@@ -347,6 +513,7 @@ function PlayMe()
         dealerNum2 =0;
         dealerTemp =0;
         dealerAQuantity = 0;
+        var betSplit =0;
 
         //replace code to restart with only 2 cards
         for(var a =3;a<=6;a++)
@@ -483,6 +650,9 @@ function PlayMe()
                 <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
                 <b>BLACKJACK!! Well Done! You win: 1.5 x ${bet} = $${bet*1.5} </b></p>`);
                 balance += bet*1.5;
+                balance += bet;
+                bet = 0;
+                won.play();
                 $(`#Hit`).hide(); 
                 $(`#Stand`).hide(); 
                 $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
@@ -500,15 +670,25 @@ function PlayMe()
     }
     else
     {
-        if(bet>balance)
+
+        if(balance<0)
+        {
+            balance = 0;
+            bet =0
+        }
+        else if(bet>balance)
         {
             bet=balance;
         }
+        showCoins();
         checkIfCanPlay();
         reDistributeChips();
         removeChips();
         $(`#balance`).html(`<u><i>Balance</u><br>$${balance}</i>`);
         $(`#bet`).html(`<u><i>Bet</u> <br>$${bet}</i>`);
+
+        //$(`#PlayBtn>b`).html(`<i><u>Play! </u></i>`);
+
     }
     
 };
@@ -585,7 +765,8 @@ function StandFunction()
                 <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
                 <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
                 <b>You Lose! the Dealer has BLACKJACK! </b></p>`);
-                balance -= bet;
+                //balance -= bet;
+                bet = 0; //you lost 
 
             }
             else
@@ -594,6 +775,8 @@ function StandFunction()
                 <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
                 <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
                 <b>The Dealer has BLACKJACK! But Its a DRAW! Nice!</b></p>`);
+                balance += bet; 
+                bet = 0;
             }
 
         }
@@ -642,14 +825,18 @@ function StandFunction()
                 {
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                 <b>Sorry, Dealer wins with a Higher Value: ${dealerTemp} VS ${temp}</b></p>`);
-                balance -= bet;
+                //balance -= bet;
+                betSplit = bet; //just in case we need in split
+                bet = 0; //you lost 
 
                 }
                 else if(dealerTemp==temp)
                 {
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-success" role="alert">
                 <b>Draw! : ${dealerTemp} VS ${temp}</b></p>`);
-                balance = balance; //or write nothing
+                balance += bet; 
+                betSplit = bet; //just in case we need in split
+                bet = 0;
 
                 }
                 else if(dealerTemp<temp && temp<22)
@@ -657,6 +844,10 @@ function StandFunction()
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                 <b>Nice! YOU WIN $${bet}!: ${temp} VS ${dealerTemp}</b></p>`);
                 balance += bet;
+                balance += bet;
+                betSplit = bet; //just in case we need in split
+                bet = 0;
+                won.play();
 
                 }
 
@@ -666,21 +857,25 @@ function StandFunction()
                     {
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                     <b>Sorry, Dealer wins with a Higher Value: ${dealerTemp} VS ${temp2}</b></p>`);
-                    balance -= bet;
+                    //balance -= bet;
+                    balance-=betSplit;
 
                     }
                     else if(dealerTemp==temp2)
                     {
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-success" role="alert">
                     <b>Draw! : ${dealerTemp} VS ${temp2}</b></p>`);
-                    balance = balance; //or write nothing...
+                    // not do anything 
 
                     }
                     else if(dealerTemp<temp2 && temp2<22)
                     {
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
-                    <b>Nice! YOU WIN $${bet}!: ${temp2} VS ${dealerTemp}</b></p>`);
-                    balance += bet;
+                    <b>Nice! YOU WIN $${betSplit}!: ${temp2} VS ${dealerTemp}</b></p>`);
+                    balance += betSplit;
+                    //balance += bet;
+                    //bet = 0;
+                    won.play();
 
                     }
 
@@ -691,18 +886,25 @@ function StandFunction()
                 $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                 <b>Dealer Busted! Good Job! Dealer has: ${dealerTemp}, You win: $${bet}</b></p>`);
                 balance += bet;
+                balance += bet; 
+                betSplit = bet;
+                bet = 0;
+                won.play();
 
                 if(SplitFlag==1 && (temp2<22 && temp<22) && temp2>0) //temp2>0 needed redundant
                 {
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
-                    <b>Double Win! Dealer Busted! Good Job! Total Winnings: $${bet*2} </b></p>`);
-                    balance += bet;
+                    <b>Double Win! Dealer Busted! Good Job! Total Winnings: $${betSplit*2} </b></p>`);
+                    balance += betSplit;
+                    bet = 0;
+                    won.play();
                 }
                 else if(SplitFlag==1 && (temp2>21 || temp>21) && temp2>0) //temp2>0 needed redundant
                 {
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-success" role="alert">
                     <b>You Win one and Lose one! DRAW! </b></p>`);
-                    balance -= bet;
+                    //nothing;
+                    balance -= betSplit;
                 }
                 
             }
@@ -715,14 +917,18 @@ function StandFunction()
                 {
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                 <b>Sorry, Dealer wins with a Higher Value: ${dealerTemp} VS ${temp}</b></p>`);
-                balance -= bet;
+                //balance -= bet;
+                betSplit = bet; //just in case we need in split
+                bet = 0; //you lost 
 
                 }
                 else if(dealerTemp==temp)
                 {
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-success" role="alert">
                 <b>Draw! : ${dealerTemp} VS ${temp}</b></p>`);
-                balance = balance; //or, write nothing 
+                balance += bet; 
+                betSplit = bet; //just in case we need in split
+                bet = 0;
 
                 }
                 else if(dealerTemp<temp && temp<22)
@@ -730,6 +936,10 @@ function StandFunction()
                     $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                 <b>Nice! YOU WIN $${bet}!: ${temp} VS ${dealerTemp}</b></p>`);
                 balance += bet;
+                balance += bet;
+                betSplit = bet; //just in case we need in split
+                bet =0;
+                won.play();
 
                 }
                 if(SplitFlag==1 && temp2>0) //temp2>0 is redundant butfor some reason is needed
@@ -738,21 +948,24 @@ function StandFunction()
                     {
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                     <b>Sorry, Dealer wins with a Higher Value: ${dealerTemp} VS ${temp2}</b></p>`);
-                    balance -= bet;
+                    //balance -= bet;
+                    //bet = 0; //you lost 
+                    balance-=betSplit;
 
                     }
                     else if(dealerTemp==temp2)
                     {
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-success" role="alert">
                     <b>Draw! : ${dealerTemp} VS ${temp2}</b></p>`);
-                    balance = balance; //or write nothing...
+                    //do nothing
 
                     }
                     else if(dealerTemp<temp2 && temp2<22)
                     {
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
-                    <b>Nice! YOU WIN $${bet}!: ${temp2} VS ${dealerTemp}</b></p>`);
-                    balance += bet;
+                    <b>Nice! YOU WIN $${betSplit}!: ${temp2} VS ${dealerTemp}</b></p>`);
+                    balance += betSplit;
+                    won.play();
 
                     }
 
@@ -816,6 +1029,10 @@ function hitMe()
             <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
             <b>BLACKJACK!! Well Done! You win: 1.5 x ${bet} = $${bet*1.5} </b></p>`);
             balance += bet*1.5;
+            balance +=bet;
+            bet = 0;
+            won.play();
+
             $(`#Hit`).hide();
             $(`#Stand`).hide();
             setTimeout(() => {
@@ -869,7 +1086,9 @@ function hitMe()
             {
                 $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-danger" role="alert">
                 <b>Oh No! You are Busted!</b></p>`);
-                balance -= bet;
+                //balance -= bet;
+                betSplit = bet;
+                bet = 0; //you lost 
                 if(SplitFlag==1)
                 {
                     $(`#HitSplit`).show();
@@ -888,7 +1107,9 @@ function hitMe()
         {
             $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-danger" role="alert">
             <b>Oh No! You are Busted!</b></p>`); 
-            balance -= bet;
+            //balance -= bet;
+            betSplit = bet;
+            bet = 0; //you lost 
             if(SplitFlag==1)
             {
                 $(`#HitSplit`).show();
@@ -953,6 +1174,9 @@ function hitMeSplit()
             <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
             <b>BLACKJACK!! Well Done! You win: 1.5 x ${bet} = ${bet*1.5} </b></p>`);
             balance += bet*1.5;
+            balance += bet;
+            bet =0;
+            won.play();
             $(`#HitSplit`).hide();
             $(`#StandSplit`).hide(); 
             StandFunction();
@@ -994,7 +1218,8 @@ function hitMeSplit()
                 $(`.messagesSplit`).append(`<p id="HitSplit" class="col-10 alert alert-danger" role="alert">
                 <b>Oh No! You are Busted!</b></p>`);
 
-                balance -= bet;
+                balance -= betSplit;
+                bet = 0; //you lost 
                 if(temp<22)
                 {
                     StandFunction();
@@ -1011,7 +1236,8 @@ function hitMeSplit()
         {
             $(`.messagesSplit`).append(`<p id="HitSplit" class="col-10 alert alert-danger" role="alert">
             <b>Oh No! You are Busted!</b></p>`); 
-            balance -= bet;
+            balance -= betSplit;
+            bet = 0; //you lost 
             if(temp<22)
             {
                 StandFunction();
@@ -1052,10 +1278,13 @@ function checkValue(num)
                 aQuantitySplit++;
             }
             splitNumber = num;
-            setTimeout(() => {
-                //alert('You can split now, do you want?');
-                $(`#SplitMe`).show();
-            }, 1100);
+            if(balance>=bet)
+            {
+                setTimeout(() => {
+                    //alert('You can split now, do you want?');
+                    $(`#SplitMe`).show();
+                }, 1100);
+            }
         }
     }
    
