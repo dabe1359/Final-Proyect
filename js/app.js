@@ -14,11 +14,7 @@ for(var i =0;i<suites.length;i++)
     cards.push(`images/${suites[i]}_of_clubs.png`);
 }
 
-
-// 2 errors: one, I can turn right carrousell when playing
-// 2nd: the left carrousell makes me go down some centimeters
-//min y max hacer en CSS
-
+// bootstrap 
 
 var suites2 = [2,3,4,5,6,7,8,9,10, 'j','q','k','a'];
 var cardsGifs = [];
@@ -41,6 +37,8 @@ var balance = 100; //initial balance = 100$
 var bet = 0; //initial bed = 0$
 var audioChips = new Audio('Sounds/ChipSound.mp3');
 var won = new Audio('Sounds/winning.mp3');
+var lost = new Audio('Sounds/Lost.mp3');
+var draw = new Audio('Sounds/Draw.mp3');
 
 
 $(`#Coin1`).on(`click`,Add1);
@@ -297,23 +295,35 @@ function reDistributeChips()
         bet = 100;
         balance-= bet;
 
+        $(`#Chips100`).css({"transform":"scale(1)"}); 
         $(`#Chips100`).attr(`src`,`images/Bets/bet100.png`);
+        $(`#arrowBlack`).css({"transform":"scale(1)"}); //scale 1 is perfect
 
+        /*
         $(`#Chips1`).attr(`src`,`images/Bets/defaultColorTable.png`);
         $(`#Chips5`).attr(`src`,`images/Bets/defaultColorTable.png`);
         $(`#Chips25`).attr(`src`,`images/Bets/defaultColorTable.png`);
         $(`#Chips50`).attr(`src`,`images/Bets/defaultColorTable.png`);
+        */
+
+        $(`#Chips1`).css({'transform': 'scale(0)'});
+        $(`#Chips5`).css({'transform': 'scale(0)'});
+        $(`#Chips25`).css({'transform': 'scale(0)'});
+        $(`#Chips50`).css({'transform': 'scale(0)'});
+
+        //transform: scale(0);
 
         $(`#arrowBlue`).css({"transform":"scale(0)"}); //transform: scale(0);
         $(`#arrowPurple`).css({"transform":"scale(0)"});
         $(`#arrowRed`).css({"transform":"scale(0)"});
         $(`#arrowGreen`).css({"transform":"scale(0)"});
-        $(`#arrowBlack`).css({"transform":"scale(1)"}); //scale 1 is perfect
+        //$(`#arrowBlack`).css({"transform":"scale(1)"}); //scale 1 is perfect
     }
 
     else
     {
-        $(`#Chips100`).attr(`src`,`images/Bets/defaultColorTable.png`);
+        //$(`#Chips100`).attr(`src`,`images/Bets/defaultColorTable.png`);
+        $(`#Chips100`).css({'transform': 'scale(0)'});
         var fifties = parseInt(bet/50);
         var twentyFives = parseInt((bet-fifties*50)/25);
         var fives = parseInt((bet-fifties*50-twentyFives*25)/5);
@@ -321,49 +331,57 @@ function reDistributeChips()
 
         if(ones>0)
         {
+            $(`#Chips1`).css({"transform":"scale(1)"}); 
             $(`#Chips1`).attr(`src`,`images/Bets/bet${ones}.png`);
             $(`#arrowBlue`).css({"transform":"scale(1)"});
             $(`#arrowBlack`).css({"transform":"scale(0)"});
         }
         else
         {
-            $(`#Chips1`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            //$(`#Chips1`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            $(`#Chips1`).css({'transform': 'scale(0)'});
             $(`#arrowBlue`).css({"transform":"scale(0)"});
         }
 
         if(fives>0)
         {
+            $(`#Chips5`).css({"transform":"scale(1)"}); 
             $(`#Chips5`).attr(`src`,`images/Bets/bet${fives*5}.png`);
             $(`#arrowPurple`).css({"transform":"scale(1)"});
             $(`#arrowBlack`).css({"transform":"scale(0)"});
         }
         else
         {
-            $(`#Chips5`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            //$(`#Chips5`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            $(`#Chips5`).css({'transform': 'scale(0)'});
             $(`#arrowPurple`).css({"transform":"scale(0)"});
         }
 
         if(twentyFives>0)
         {
+            $(`#Chips25`).css({"transform":"scale(1)"}); 
             $(`#Chips25`).attr(`src`,`images/Bets/bet${twentyFives*25}.png`);
             $(`#arrowRed`).css({"transform":"scale(1)"});
             $(`#arrowBlack`).css({"transform":"scale(0)"});
         }
         else
         {
-            $(`#Chips25`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            //$(`#Chips25`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            $(`#Chips25`).css({'transform': 'scale(0)'});
             $(`#arrowRed`).css({"transform":"scale(0)"});
         }
 
         if(fifties>0)
         {
+            $(`#Chips50`).css({"transform":"scale(1)"}); 
             $(`#Chips50`).attr(`src`,`images/Bets/bet${fifties*50}.png`);
             $(`#arrowGreen`).css({"transform":"scale(1)"});
             $(`#arrowBlack`).css({"transform":"scale(0)"});
         }
         else
         {
-            $(`#Chips50`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            //$(`#Chips50`).attr(`src`,`images/Bets/defaultColorTable.png`);
+            $(`#Chips50`).css({'transform': 'scale(0)'});
             $(`#arrowGreen`).css({"transform":"scale(0)"});
             $(`#arrowBlack`).css({"transform":"scale(0)"});
         }
@@ -403,6 +421,7 @@ var dealerNum1 ;
 var dealerNum2 ;
 var dealerTemp;
 var dealerAQuantity = 0;
+var winResult = 0; //if winResult == 3 won, 2 is draw, 1 is lost, else = 0...
 
 var num1 ;
 var num2 ;
@@ -652,11 +671,15 @@ function PlayMe()
                 balance += bet*1.5;
                 balance += bet;
                 bet = 0;
-                won.play();
+                winResult = 3;
                 $(`#Hit`).hide(); 
                 $(`#Stand`).hide(); 
-                $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
-                $(`#buttonPlay`).show();
+
+                setTimeout(() => {
+                    $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
+                    soundResult();
+                    $(`#buttonPlay`).show();
+                }, 500);
         }
         else
         {
@@ -665,7 +688,6 @@ function PlayMe()
                 $(`#Stand`).show(); 
             }, 1000);
         }
-
 
     }
     else
@@ -752,6 +774,7 @@ function StandFunction()
             setTimeout(() => {
                 $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
                 $(`#buttonPlay`).show();
+                soundResult();
             }, 1300);
         }
 
@@ -766,7 +789,8 @@ function StandFunction()
                 <img src="https://img.icons8.com/ios/50/000000/cards.png"/>
                 <b>You Lose! the Dealer has BLACKJACK! </b></p>`);
                 //balance -= bet;
-                bet = 0; //you lost 
+                bet = 0; //you lost
+                winResult = 1;
 
             }
             else
@@ -777,6 +801,7 @@ function StandFunction()
                 <b>The Dealer has BLACKJACK! But Its a DRAW! Nice!</b></p>`);
                 balance += bet; 
                 bet = 0;
+                winResult = 2;
             }
 
         }
@@ -808,6 +833,7 @@ function StandFunction()
                 setTimeout(() => {
                     $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
                     $(`#buttonPlay`).show();
+                    soundResult();
                 }, 1900*tempHitTimes);
             }
             else
@@ -815,6 +841,7 @@ function StandFunction()
                 setTimeout(() => {
                     $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
                     $(`#buttonPlay`).show();
+                    soundResult();
                 }, 1400*tempHitTimes);
             }
            
@@ -828,6 +855,7 @@ function StandFunction()
                 //balance -= bet;
                 betSplit = bet; //just in case we need in split
                 bet = 0; //you lost 
+                winResult = 1; 
 
                 }
                 else if(dealerTemp==temp)
@@ -837,6 +865,7 @@ function StandFunction()
                 balance += bet; 
                 betSplit = bet; //just in case we need in split
                 bet = 0;
+                winResult = 2;
 
                 }
                 else if(dealerTemp<temp && temp<22)
@@ -847,7 +876,7 @@ function StandFunction()
                 balance += bet;
                 betSplit = bet; //just in case we need in split
                 bet = 0;
-                won.play();
+                winResult = 3;
 
                 }
 
@@ -859,6 +888,7 @@ function StandFunction()
                     <b>Sorry, Dealer wins with a Higher Value: ${dealerTemp} VS ${temp2}</b></p>`);
                     //balance -= bet;
                     balance-=betSplit;
+                    winResult = 1;
 
                     }
                     else if(dealerTemp==temp2)
@@ -866,6 +896,7 @@ function StandFunction()
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-success" role="alert">
                     <b>Draw! : ${dealerTemp} VS ${temp2}</b></p>`);
                     // not do anything 
+                    winResult = 2;
 
                     }
                     else if(dealerTemp<temp2 && temp2<22)
@@ -875,7 +906,7 @@ function StandFunction()
                     balance += betSplit;
                     //balance += bet;
                     //bet = 0;
-                    won.play();
+                    winResult = 3;
 
                     }
 
@@ -889,7 +920,7 @@ function StandFunction()
                 balance += bet; 
                 betSplit = bet;
                 bet = 0;
-                won.play();
+                winResult = 3;
 
                 if(SplitFlag==1 && (temp2<22 && temp<22) && temp2>0) //temp2>0 needed redundant
                 {
@@ -897,7 +928,7 @@ function StandFunction()
                     <b>Double Win! Dealer Busted! Good Job! Total Winnings: $${betSplit*2} </b></p>`);
                     balance += betSplit;
                     bet = 0;
-                    won.play();
+                    winResult = 3;
                 }
                 else if(SplitFlag==1 && (temp2>21 || temp>21) && temp2>0) //temp2>0 needed redundant
                 {
@@ -905,6 +936,7 @@ function StandFunction()
                     <b>You Win one and Lose one! DRAW! </b></p>`);
                     //nothing;
                     balance -= betSplit;
+                    winResult = 2; //if winResult == 3 won, 2 is draw, 1 is lost, else = 0...
                 }
                 
             }
@@ -920,6 +952,7 @@ function StandFunction()
                 //balance -= bet;
                 betSplit = bet; //just in case we need in split
                 bet = 0; //you lost 
+                winResult = 1;
 
                 }
                 else if(dealerTemp==temp)
@@ -929,6 +962,7 @@ function StandFunction()
                 balance += bet; 
                 betSplit = bet; //just in case we need in split
                 bet = 0;
+                winResult = 2;
 
                 }
                 else if(dealerTemp<temp && temp<22)
@@ -939,7 +973,7 @@ function StandFunction()
                 balance += bet;
                 betSplit = bet; //just in case we need in split
                 bet =0;
-                won.play();
+                winResult = 3;
 
                 }
                 if(SplitFlag==1 && temp2>0) //temp2>0 is redundant butfor some reason is needed
@@ -951,6 +985,7 @@ function StandFunction()
                     //balance -= bet;
                     //bet = 0; //you lost 
                     balance-=betSplit;
+                    winResult = 1;
 
                     }
                     else if(dealerTemp==temp2)
@@ -958,6 +993,7 @@ function StandFunction()
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-success" role="alert">
                     <b>Draw! : ${dealerTemp} VS ${temp2}</b></p>`);
                     //do nothing
+                    winResult = 2;
 
                     }
                     else if(dealerTemp<temp2 && temp2<22)
@@ -965,7 +1001,7 @@ function StandFunction()
                         $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-warning" role="alert">
                     <b>Nice! YOU WIN $${betSplit}!: ${temp2} VS ${dealerTemp}</b></p>`);
                     balance += betSplit;
-                    won.play();
+                    winResult = 3;
 
                     }
 
@@ -1031,7 +1067,7 @@ function hitMe()
             balance += bet*1.5;
             balance +=bet;
             bet = 0;
-            won.play();
+            winResult = 3;
 
             $(`#Hit`).hide();
             $(`#Stand`).hide();
@@ -1086,6 +1122,7 @@ function hitMe()
             {
                 $(`.messages`).append(`<p id="Hit" class="col-10 alert alert-danger" role="alert">
                 <b>Oh No! You are Busted!</b></p>`);
+                winResult = 1;
                 //balance -= bet;
                 betSplit = bet;
                 bet = 0; //you lost 
@@ -1097,8 +1134,11 @@ function hitMe()
                 }
                 else
                 {
-                    $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
-                    $(`#buttonPlay`).show();
+                    setTimeout(() => {
+                        $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
+                        soundResult();
+                        $(`#buttonPlay`).show();
+                    }, 500);
                 }
             }
 
@@ -1110,6 +1150,7 @@ function hitMe()
             //balance -= bet;
             betSplit = bet;
             bet = 0; //you lost 
+            winResult = 1;
             if(SplitFlag==1)
             {
                 $(`#HitSplit`).show();
@@ -1118,8 +1159,11 @@ function hitMe()
             }
             else
             {
-                $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
-                $(`#buttonPlay`).show();
+                setTimeout(() => {
+                    $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
+                    soundResult();
+                    $(`#buttonPlay`).show();
+                }, 500);
             }
         }
     }
@@ -1176,7 +1220,7 @@ function hitMeSplit()
             balance += bet*1.5;
             balance += bet;
             bet =0;
-            won.play();
+            winResult = 3;
             $(`#HitSplit`).hide();
             $(`#StandSplit`).hide(); 
             StandFunction();
@@ -1220,14 +1264,18 @@ function hitMeSplit()
 
                 balance -= betSplit;
                 bet = 0; //you lost 
+                winResult = 1;
                 if(temp<22)
                 {
                     StandFunction();
                 }
                 else
                 {
-                    $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
-                    $(`#buttonPlay`).show();
+                    setTimeout(() => {
+                        $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
+                        soundResult();
+                        $(`#buttonPlay`).show();
+                    }, 500);
                 }
             }
 
@@ -1238,14 +1286,18 @@ function hitMeSplit()
             <b>Oh No! You are Busted!</b></p>`); 
             balance -= betSplit;
             bet = 0; //you lost 
+            winResult = 1;
             if(temp<22)
             {
                 StandFunction();
             }
             else
             {
-                $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
-                $(`#buttonPlay`).show();
+                setTimeout(() => {
+                    $(`.PlayButton`).attr(`class`,`PlayButton carousel-control-next`);
+                    soundResult();
+                    $(`#buttonPlay`).show();
+                }, 500);
             }
         }
     }
@@ -1333,3 +1385,20 @@ function DealercheckValue(num)
 
 }
 
+function soundResult() 
+{
+    if(winResult==1)
+    {
+        lost.play();
+    }
+    else if(winResult==2)
+    {
+        draw.play();
+    }
+    else if(winResult==3)
+    {
+        won.play();
+    }
+
+    winResult = 0;
+}
